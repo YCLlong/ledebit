@@ -6,6 +6,7 @@ import com.ledebit.pojo.User;
 import com.ledebit.service.IUserservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -47,6 +48,10 @@ public class ManageUserController {
         session.removeAttribute(Const.CURRENT_USER);
         return  ServiceResponse.createbysuccess();
     }
+
+//    @RequestMapping(value = "showrecord.do",method = RequestMethod.POST)
+//    @RequestBody
+//    public ServiceResponse<>
 
 
 }

@@ -1,35 +1,36 @@
 package com.ledebit.pojo;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class loan {
-    private String id;
+    private Integer id;
 
-    private String debitid;
+    private String debitname;
 
     private String deKind;
 
     private Date deTime;
 
-    private String deAmount;
+    private BigDecimal deAmount;
 
     private Date crDeadline;
 
-    private String crAmount;
+    private BigDecimal crAmount;
 
-    private String deRepayed;
+    private BigDecimal deRepayed;
 
     private Date createTime;
 
     private Date updateTime;
 
-    private Integer isoverdue;
+    private Integer recordstatus;
 
     private Integer pushstatus;
 
-    public loan(String id, String debitid, String deKind, Date deTime, String deAmount, Date crDeadline, String crAmount, String deRepayed, Date createTime, Date updateTime, Integer isoverdue, Integer pushstatus) {
+    public loan(Integer id, String debitname, String deKind, Date deTime, BigDecimal deAmount, Date crDeadline, BigDecimal crAmount, BigDecimal deRepayed, Date createTime, Date updateTime, Integer recordstatus, Integer pushstatus) {
         this.id = id;
-        this.debitid = debitid;
+        this.debitname = debitname;
         this.deKind = deKind;
         this.deTime = deTime;
         this.deAmount = deAmount;
@@ -38,7 +39,7 @@ public class loan {
         this.deRepayed = deRepayed;
         this.createTime = createTime;
         this.updateTime = updateTime;
-        this.isoverdue = isoverdue;
+        this.recordstatus = recordstatus;
         this.pushstatus = pushstatus;
     }
 
@@ -46,20 +47,20 @@ public class loan {
         super();
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+    public void setId(Integer id) {
+        this.id = id ;
     }
 
-    public String getDebitid() {
-        return debitid;
+    public String getdebitname() {
+        return debitname;
     }
 
-    public void setDebitid(String debitid) {
-        this.debitid = debitid == null ? null : debitid.trim();
+    public void setDebitid(String debitname) {
+        this.debitname = debitname ;
     }
 
     public String getDeKind() {
@@ -78,12 +79,12 @@ public class loan {
         this.deTime = deTime;
     }
 
-    public String getDeAmount() {
+    public BigDecimal getDeAmount() {
         return deAmount;
     }
 
-    public void setDeAmount(String deAmount) {
-        this.deAmount = deAmount == null ? null : deAmount.trim();
+    public void setDeAmount(BigDecimal deAmount) {
+        this.deAmount = deAmount;
     }
 
     public Date getCrDeadline() {
@@ -94,20 +95,20 @@ public class loan {
         this.crDeadline = crDeadline;
     }
 
-    public String getCrAmount() {
+    public BigDecimal getCrAmount() {
         return crAmount;
     }
 
-    public void setCrAmount(String crAmount) {
-        this.crAmount = crAmount == null ? null : crAmount.trim();
+    public void setCrAmount(BigDecimal crAmount) {
+        this.crAmount = crAmount;
     }
 
-    public String getDeRepayed() {
+    public BigDecimal getDeRepayed() {
         return deRepayed;
     }
 
-    public void setDeRepayed(String deRepayed) {
-        this.deRepayed = deRepayed == null ? null : deRepayed.trim();
+    public void setDeRepayed(BigDecimal deRepayed) {
+        this.deRepayed = deRepayed;
     }
 
     public Date getCreateTime() {
@@ -126,12 +127,12 @@ public class loan {
         this.updateTime = updateTime;
     }
 
-    public Integer getIsoverdue() {
-        return isoverdue;
+    public Integer getrecordstatus() {
+        return recordstatus;
     }
 
-    public void setIsoverdue(Integer isoverdue) {
-        this.isoverdue = isoverdue;
+    public void setrecordstatus(Integer recordstatus) {
+        this.recordstatus = recordstatus;
     }
 
     public Integer getPushstatus() {

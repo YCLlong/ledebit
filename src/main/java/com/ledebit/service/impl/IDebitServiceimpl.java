@@ -89,6 +89,7 @@ public class IDebitServiceimpl implements IDebitService {
 
     private debitvo assemblefordeitvo(debit debitinfo){
         debitvo debitvos=new debitvo();
+        debitvos.setId(debitinfo.getId());
         debitvos.setAge(debitinfo.getAge());
         debitvos.setCreditrank(debitinfo.getCreditrank());
         debitvos.setDebittype(debitinfo.getDebittype());

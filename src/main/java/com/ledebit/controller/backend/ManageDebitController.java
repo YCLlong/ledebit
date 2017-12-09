@@ -27,6 +27,8 @@ public class ManageDebitController {
     private IUserservice iUserservice;
     @Autowired
     private IDebitService iDebitService;
+
+    //todo 显示用户的贷款记录
     @RequestMapping(value = "save.do",method = RequestMethod.POST)
     @ResponseBody
     public ServiceResponse save(HttpSession session,debit debitinfo){

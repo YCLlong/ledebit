@@ -8,6 +8,16 @@ import java.util.List;
  * Created by Administrator on 2017/11/30.
  */
 public class debitvo {
+    private Integer id;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     private Integer age;
 
     private String name;

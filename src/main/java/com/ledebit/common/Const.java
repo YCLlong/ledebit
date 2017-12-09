@@ -11,6 +11,10 @@ public class Const  {
         int ROLECOSTOMMER = 0;//普通用户
         int ROLEMANGER =1; //管理员
     }
+    public interface PushStatus{
+        int NO=0;
+        int YES=1;
+    }
     public enum creditranksenum{
         ROOKIE(0,"新人"),
         COPPER(10,"铜"),
@@ -43,4 +47,35 @@ public class Const  {
             throw new RuntimeException("没有找到对应的枚举");
         }
     }
+    public enum recordstatusenum{
+        UNPAY(1,"未付款"),
+        OVERDUE(2,"已逾期"),
+        PAID(3,"已付款")
+        ;
+        private String value;
+        private int code;
+
+        recordstatusenum(int code,String value){
+            this.code=code;
+            this.value=value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public int getCode() {
+            return code;
+        }
+
+        public static recordstatusenum codeof(int code){
+            for(Const.recordstatusenum recordstatusenum:values()){
+                if(recordstatusenum.getCode()==code){
+                    return  recordstatusenum;
+                }
+            }
+            throw new RuntimeException("没有找到对应的枚举");
+        }
+    }
+
 }

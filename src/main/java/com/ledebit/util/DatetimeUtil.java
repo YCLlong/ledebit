@@ -47,7 +47,7 @@ public class DatetimeUtil {
         if(date==null){
             return 0;
         }
-        long translatetime=date.getTime()/1000;
+        long translatetime=date.getTime()/1000000;
         return translatetime;
     }
 }
