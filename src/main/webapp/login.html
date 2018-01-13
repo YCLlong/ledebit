@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lebitlogin</title>
+</head>
+<body>
+<div id="container">
+    <div class="logo">
+        <a href="#"><img src="assets/logo.png" alt="" /></a>
+    </div>
+    <div id="box">
+        <form>
+            <p class="main">
+                <label>用户名: </label>
+                <input name="username" id="u1">
+                <label>密码: </label>
+                <input type="password" id="u2" name="password">
+            </p>
+            <p class="space">
+                <input type="submit" value="登录" id="login" style="cursor: pointer;">
+            </p>
+        </form>
+    </div>
+</div>
+<script src="js/jquery-3.0.0.min.js"></script>
+<script>
+// 写在表单后面否则获取不到表单
+$("#login").click(function() {
+    var username = $("#u1").val();
+    var password = $("#u2").val();
+
+    console.log(`${username} -- ${password}`);
+
+    $.ajax({
+        // 用 127.0.0.1 要设置某些头部
+        url: 'http://localhost:8080/backend/user/managelogin.do', // Request url
+        // 你的 jQuery 版本太低，用 type 属性
+        type: "POST", // The HTTP method to use for the request
+        dataType: 'json', // The type of data that you're expecting back from the server
+        data: {username: username, password: password}, // Data to be sent to the server
+        success(res) {
+            if(res.status==1){
+            alert(res.msg+",请重新登录");}
+            if(res.status==0){
+                alert(res.msg+"欢迎您"+res.data.username);
+                window.location.href='http://localhost:8080/managemain.html';
+            }
+        },
+    });
+
+    return false;
+});
+</script>
+</body>
+</html>

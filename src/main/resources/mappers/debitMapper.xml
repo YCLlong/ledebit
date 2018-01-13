@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ledebit.dao.debitMapper" >
+  <resultMap id="BaseResultMap" type="com.ledebit.pojo.debit" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="age" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="debitname" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="job" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="tel" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="gender" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="email" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="creditrank" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="debitType" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, age, debitname, job, tel, gender, email, creditrank, debitType, create_time, update_time,
+    user_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from debit
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByUserid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from debit
+    where  user_id = #{userid}
+  </select>
+  <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from debit
+    where  debitname = #{name}
+  </select>
+  <select id="selectBynameAndTel" resultMap="BaseResultMap" parameterType="map">
+    SELECT
+    <include refid="Base_Column_List" />
+    from debit
+    <where>
+      <if test="name != null">
+        and debitname like #{name}
+      </if>
+      <if test="tel != null">
+        and tel like #{tel}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from debit
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ledebit.pojo.debit">
+    insert into debit (age, debitname,
+      job, tel, gender, email, 
+      creditrank, debitType, create_time, 
+      update_time, user_id)
+    values (#{age,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+      #{job,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, 
+      #{creditrank,jdbcType=INTEGER}, #{debittype,jdbcType=INTEGER}, now(),
+      now(), #{userId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ledebit.pojo.debit" >
+    insert into debit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="name != null" >
+        debitname,
+      </if>
+      <if test="job != null" >
+        job,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="creditrank != null" >
+        creditrank,
+      </if>
+      <if test="debittype != null" >
+        debitType,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null" >
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="creditrank != null" >
+        #{creditrank,jdbcType=INTEGER},
+      </if>
+      <if test="debittype != null" >
+        #{debittype,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+       now(),
+      </if>
+      <if test="updateTime != null" >
+      now(),
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ledebit.pojo.debit" >
+    update debit
+    <set >
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        debitname = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null" >
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="creditrank != null" >
+        creditrank = #{creditrank,jdbcType=INTEGER},
+      </if>
+      <if test="debittype != null" >
+        debitType = #{debittype,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        now(),
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ledebit.pojo.debit" >
+    update debit
+    set age = #{age,jdbcType=INTEGER},
+      debitname = #{name,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR},
+      creditrank = #{creditrank,jdbcType=INTEGER},
+      debitType = #{debittype,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      now(),
+      user_id = #{userId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectList" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List" />
+  FROM debit
+  order by id ASC
+</select>
+  <select id="selectall" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    FROM debit
+    order by id ASC
+  </select>
+</mapper>
