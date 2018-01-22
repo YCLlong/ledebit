@@ -52,9 +52,9 @@ public class Const  {
         }
     }
     public enum recordstatusenum{
-        UNPAY(1,"未付款"),
+        UNPAY(1,"未付清账款"),
         OVERDUE(2,"已逾期"),
-        PAID(3,"已付款")
+        PAID(3,"已付清账款")
         ;
         private String value;
         private int code;

@@ -1,8 +1,13 @@
 package com.ledebit.service;
 
 import com.github.pagehelper.PageInfo;
+import com.ledebit.common.PageinfoResponse;
 import com.ledebit.common.ServiceResponse;
 import com.ledebit.pojo.debit;
+import com.ledebit.vo.Debitandrecordvo;
+import com.ledebit.vo.debitvo;
+
+import java.util.List;
 
 
 /**
@@ -13,9 +18,12 @@ public interface IDebitService {
 
     ServiceResponse changeorupdaterank(int rank,String username);
 
-    ServiceResponse<PageInfo> searchdebitbynameortelorboth(String name, String tel, Integer pagenum, Integer pagesize);
+    PageinfoResponse<List> searchdebitbynameortelorboth(String name, String tel, Integer pagenum, Integer pagesize);
 
-    ServiceResponse<PageInfo> listall(int pagenum,int pagesize);
+    PageinfoResponse<List> listall(int pagenum,int pagesize);
 
-    public ServiceResponse deletedebit(int id);
+    ServiceResponse deletedebit(int id);
+
+    ServiceResponse<Debitandrecordvo> personalfrom(int id);
+
 }

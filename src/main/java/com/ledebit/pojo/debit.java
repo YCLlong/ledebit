@@ -11,7 +11,10 @@ public class debit {
 
     private String name;
 
-    private String job;
+    private Long identitys;
+
+
+    private String location;
 
     private String tel;
 
@@ -29,11 +32,12 @@ public class debit {
 
     private Integer userId;
 
-    public debit(Integer id, Integer age, String name, String job, String tel, Integer gender, String email, Integer creditrank, Integer debittype, Date createTime, Date updateTime, Integer userId) {
+    public debit(Integer id, Integer age,Long identitys, String name, String location, String tel, Integer gender, String email, Integer creditrank, Integer debittype, Date createTime, Date updateTime, Integer userId) {
         this.id = id;
         this.age = age;
+        this.identitys=identitys;
         this.name = name;
-        this.job = job;
+        this.location = location;
         this.tel = tel;
         this.gender = gender;
         this.email = email;
@@ -64,6 +68,14 @@ public class debit {
         this.age = age;
     }
 
+    public Long getidentitys() {
+        return identitys;
+    }
+
+    public void setidentitys(Long identitys) {
+        this.identitys = identitys;
+    }
+
     public String getName() {
         return name;
     }
@@ -72,12 +84,12 @@ public class debit {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getJob() {
-        return job;
+    public String getlocation() {
+        return location;
     }
 
-    public void setJob(String job) {
-        this.job = job == null ? null : job.trim();
+    public void setlocation(String location) {
+        this.location = location == null ? null : location.trim();
     }
 
     public String getTel() {

@@ -1,27 +1,80 @@
 package com.ledebit.vo;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
  * Created by Administrator on 2017/12/5.
  */
 public class Debitandrecordvo {
-    private  debitvo debitvos;
-    private List<Recordvo> recordvoList;
+    private Integer debitid;
 
-    public debitvo getDebitvos() {
-        return debitvos;
+    private String debitname;
+
+    private String criditrank;
+
+    private Long recordsum;//总记录数
+
+    private BigDecimal desum;//总金额
+
+    private BigDecimal delaysum;//欠款总额
+
+    private Long overduesum;//催债次数
+
+    public Integer getDebitid() {
+        return debitid;
     }
 
-    public void setDebitvos(debitvo debitvos) {
-        this.debitvos = debitvos;
+    public void setDebitid(Integer debitid) {
+        this.debitid = debitid;
     }
 
-    public List<Recordvo> getRecordvoList() {
-        return recordvoList;
+    public String getDebitname() {
+        return debitname;
     }
 
-    public void setRecordvoList(List<Recordvo> recordvoList) {
-        this.recordvoList = recordvoList;
+    public void setDebitname(String debitname) {
+        this.debitname = debitname;
     }
+
+    public String getCriditrank() {
+        return criditrank;
+    }
+
+    public void setCriditrank(String criditrank) {
+        this.criditrank = criditrank;
+    }
+
+    public Long getRecordsum() {
+        return recordsum;
+    }
+
+    public void setRecordsum(Long recordsum) {
+        this.recordsum = recordsum;
+    }
+
+    public BigDecimal getDesum() {
+        return desum;
+    }
+
+    public void setDesum(BigDecimal desum) {
+        this.desum = desum;
+    }
+
+    public BigDecimal getDelaysum() {
+        return delaysum;
+    }
+
+    public void setDelaysum(BigDecimal delaysum) {
+        this.delaysum = delaysum;
+    }
+
+    public Long getOverduesum() {
+        return overduesum;
+    }
+
+    public void setOverduesum(Long overduesum) {
+        this.overduesum = overduesum;
+    }
+
 }

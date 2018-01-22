@@ -5,8 +5,9 @@
     <constructor >
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="record_no" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="debitid" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="debitname" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="de_kind" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="de_kind" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="de_time" jdbcType="DATE" javaType="java.util.Date" />
       <arg column="de_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
       <arg column="cr_deadline" jdbcType="DATE" javaType="java.util.Date" />
@@ -19,7 +20,7 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, record_no, debitname, de_kind, de_time, de_amount, cr_deadline, cr_amount, de_repayed, 
+    id, record_no, debitid, debitname, de_kind, de_time, de_amount, cr_deadline, cr_amount, de_repayed,
     create_time, update_time, recordstatus, pushstatus
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -33,13 +34,13 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.ledebit.pojo.loan" >
-    insert into loan (id, record_no, debitname, 
+    insert into loan (id, record_no, debitId, debitname,
       de_kind, de_time, de_amount, 
       cr_deadline, cr_amount, de_repayed, 
       create_time, update_time, recordstatus, 
       pushstatus)
-    values (#{id,jdbcType=INTEGER}, #{recordNo,jdbcType=BIGINT}, #{debitname,jdbcType=VARCHAR}, 
-      #{deKind,jdbcType=VARCHAR}, #{deTime,jdbcType=DATE}, #{deAmount,jdbcType=DECIMAL}, 
+    values (#{id,jdbcType=INTEGER}, #{recordNo,jdbcType=BIGINT}, #{debitId,jdbcType=INTEGER}, #{debitname,jdbcType=VARCHAR},
+      #{deKind,jdbcType=INTEGER}, #{deTime,jdbcType=DATE}, #{deAmount,jdbcType=DECIMAL},
       #{crDeadline,jdbcType=DATE}, #{crAmount,jdbcType=DECIMAL}, #{deRepayed,jdbcType=DECIMAL}, 
       now(), now(), #{recordstatus,jdbcType=INTEGER},
       #{pushstatus,jdbcType=INTEGER})
@@ -52,6 +53,9 @@
       </if>
       <if test="recordNo != null" >
         record_no,
+      </if>
+      <if test="debitId != null">
+        debitid,
       </if>
       <if test="debitname != null" >
         debitname,
@@ -94,11 +98,14 @@
       <if test="recordNo != null" >
         #{recordNo,jdbcType=BIGINT},
       </if>
+      <if test="debitId !=null">
+        #{debitId,jdbcType=INTEGER},
+      </if>
       <if test="debitname != null" >
         #{debitname,jdbcType=VARCHAR},
       </if>
       <if test="deKind != null" >
-        #{deKind,jdbcType=VARCHAR},
+        #{deKind,jdbcType=INTEGER},
       </if>
       <if test="deTime != null" >
         #{deTime,jdbcType=DATE},
@@ -135,11 +142,14 @@
       <if test="recordNo != null" >
         record_no = #{recordNo,jdbcType=BIGINT},
       </if>
+      <if test="debitId != null" >
+        debitid = #{debitId,jdbcType=INTEGER},
+      </if>
       <if test="debitname != null" >
         debitname = #{debitname,jdbcType=VARCHAR},
       </if>
       <if test="deKind != null" >
-        de_kind = #{deKind,jdbcType=VARCHAR},
+        de_kind = #{deKind,jdbcType=INTEGER},
       </if>
       <if test="deTime != null" >
         de_time = #{deTime,jdbcType=DATE},
@@ -174,8 +184,9 @@
   <update id="updateByPrimaryKey" parameterType="com.ledebit.pojo.loan" >
     update loan
     set record_no = #{recordNo,jdbcType=BIGINT},
+      debitid = #{debitId,jdbcType=INTEGER},
       debitname = #{debitname,jdbcType=VARCHAR},
-      de_kind = #{deKind,jdbcType=VARCHAR},
+      de_kind = #{deKind,jdbcType=INTEGER},
       de_time = #{deTime,jdbcType=DATE},
       de_amount = #{deAmount,jdbcType=DECIMAL},
       cr_deadline = #{crDeadline,jdbcType=DATE},
@@ -187,19 +198,19 @@
       pushstatus = #{pushstatus,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectall" resultMap="BaseResultMap">
+  <select id="selectallfromloan" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from loan
-    order by creat_time DESC
+    order by record_no DESC
   </select>
   <select id="selectByLoanidandDebitname" resultMap="BaseResultMap" parameterType="map">
     select
     <include refid="Base_Column_List" />
     from loan
     <where>
-      <if test="loanid != null">
-        and id = #{loanid}
+      <if test="debitid != null">
+        and debitid = #{debitid}
       </if>
       <if test="debitname != null">
         and debitname LIKE #{debitname}
@@ -212,4 +223,24 @@
     where
     id = #{loanid,jdbcType=INTEGER}
   </update>
+  <select id="checkno" parameterType="java.lang.Long" resultType="java.lang.Integer">
+    SELECT
+    count(1)
+    from loan
+    where record_no = #{recordno}
+  </select>
+  <select id="selectbydebitid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM loan
+    WHERE debitid = #{debitid}
+  </select>
+  <select id="selectoverduefromloan" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from loan
+    WHERE
+    recordstatus = #{status}
+    order by record_no DESC
+  </select>
 </mapper>

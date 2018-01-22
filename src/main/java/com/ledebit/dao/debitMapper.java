@@ -22,6 +22,10 @@ public interface debitMapper {
 
     debit selectByUserName(String name);
 
+    int checkidentitys(Long identitys);
+
+    int  CheckIdAndUsername(@Param("id")Integer id,@Param("name")String name);
+
     List<debit> selectBynameAndTel(@Param("name") String name, @Param("tel") String tel);
 
     List<debit> selectList();

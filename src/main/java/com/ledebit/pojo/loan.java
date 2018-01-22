@@ -1,40 +1,32 @@
 package com.ledebit.pojo;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class loan {
     private Integer id;
-
     private Long recordNo;
-
+    private Integer debitId;
     private String debitname;
-
-    private String deKind;
-
+    private Integer deKind;
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date deTime;
-
     private BigDecimal deAmount;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date crDeadline;
-
     private BigDecimal crAmount;
-
     private BigDecimal deRepayed;
-
     private Date createTime;
-
     private Date updateTime;
-
     private Integer recordstatus;
-
     private Integer pushstatus;
-
-    public loan(Integer id, Long recordNo, String debitname, String deKind, Date deTime, BigDecimal deAmount, Date crDeadline, BigDecimal crAmount, BigDecimal deRepayed, Date createTime, Date updateTime, Integer recordstatus, Integer pushstatus) {
+    public loan(Integer id, Long recordNo,Integer debitId, String debitname, Integer deKind, Date deTime, BigDecimal deAmount, Date crDeadline, BigDecimal crAmount, BigDecimal deRepayed, Date createTime, Date updateTime, Integer recordstatus, Integer pushstatus) {
         this.id = id;
         this.recordNo = recordNo;
+        this.debitId=debitId;
         this.debitname = debitname;
         this.deKind = deKind;
         this.deTime = deTime;
@@ -63,6 +55,13 @@ public class loan {
     public Long getRecordNo() {
         return recordNo;
     }
+    public Integer getDebitId() {
+        return debitId;
+    }
+
+    public void setDebitId(Integer debitId) {
+        this.debitId = debitId;
+    }
 
     public void setRecordNo(Long recordNo) {
         this.recordNo = recordNo;
@@ -76,12 +75,12 @@ public class loan {
         this.debitname = debitname == null ? null : debitname.trim();
     }
 
-    public String getDeKind() {
+    public Integer getDeKind() {
         return deKind;
     }
 
-    public void setDeKind(String deKind) {
-        this.deKind = deKind == null ? null : deKind.trim();
+    public void setDeKind(Integer deKind) {
+        this.deKind = deKind;
     }
 
     public Date getDeTime() {

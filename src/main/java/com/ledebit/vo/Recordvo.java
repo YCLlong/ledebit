@@ -1,7 +1,6 @@
 package com.ledebit.vo;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 /**
  * Created by Administrator on 2017/12/5.
@@ -12,6 +11,15 @@ public class Recordvo {
     private Long recordno;
 
 
+    private Integer debitId;
+
+    public Integer getDebitId() {
+        return debitId;
+    }
+
+    public void setDebitId(Integer debitId) {
+        this.debitId = debitId;
+    }
 
     private String debitname;
 
@@ -27,9 +35,9 @@ public class Recordvo {
 
     private BigDecimal deRepayed;
 
-    private Integer recordstatus;
+    private String recordstatus;
 
-    private Integer pushstatus;
+    private String pushstatus;
 
 
     public Integer getId() {
@@ -76,19 +84,19 @@ public class Recordvo {
         this.crDeadline = crDeadline;
     }
 
-    public Integer getRecordstatus() {
+    public String getRecordstatus() {
         return recordstatus;
     }
 
-    public void setRecordstatus(Integer recordstatus) {
+    public void setRecordstatus(String recordstatus) {
         this.recordstatus = recordstatus;
     }
 
-    public Integer getPushstatus() {
+    public String getPushstatus() {
         return pushstatus;
     }
 
-    public void setPushstatus(Integer pushstatus) {
+    public void setPushstatus(String pushstatus) {
         this.pushstatus = pushstatus;
     }
     public BigDecimal getDeAmount() {

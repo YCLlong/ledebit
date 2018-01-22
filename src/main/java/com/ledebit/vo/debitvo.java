@@ -6,12 +6,13 @@ package com.ledebit.vo;
 public class debitvo {
     private Integer id;
 
+    private String name;
 
     private Integer age;
 
-    private String name;
+    private Long identitys;
 
-    private String job;
+    private String location;
 
     private String tel;
 
@@ -23,6 +24,8 @@ public class debitvo {
 
     private String debittype;
 
+    private Integer userid;
+
 //    private List<loan> loaninfolist;
 //
 //    public List<loan> getLoaninfolist() {
@@ -32,6 +35,22 @@ public class debitvo {
 //    public void setLoaninfolist(List<loan> loaninfolist) {
 //        this.loaninfolist = loaninfolist;
 //    }
+public debitvo(Integer id, String name, Integer age, Long identitys, String location, String tel, String gender, String email, String creditrank, String debittype, Integer userid) {
+    this.id = id;
+    this.name = name;
+    this.age = age;
+    this.identitys = identitys;
+    this.location = location;
+    this.tel = tel;
+    this.gender = gender;
+    this.email = email;
+    this.creditrank = creditrank;
+    this.debittype = debittype;
+    this.userid = userid;
+}
+public debitvo(){
+
+}
     public Integer getId() {
     return id;
 }
@@ -56,12 +75,29 @@ public class debitvo {
         this.name = name;
     }
 
-    public String getJob() {
-        return job;
+    public Long getidentitys() {
+        return identitys;
     }
 
-    public void setJob(String job) {
-        this.job = job;
+    public void setidentitys(Long identitys) {
+        this.identitys = identitys;
+    }
+
+    public Integer getUserid() {
+
+        return userid;
+    }
+
+    public void setUserid(Integer userid) {
+        this.userid = userid;
+    }
+
+    public String getlocation() {
+        return location;
+    }
+
+    public void setlocation(String location) {
+        this.location = location;
     }
 
     public String getTel() {

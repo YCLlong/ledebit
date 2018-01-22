@@ -5,8 +5,9 @@
     <constructor >
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="age" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="identitys" jdbcType="BIGINT" javaType="java.lang.Long" />
       <arg column="debitname" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="job" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="location" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="tel" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="gender" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="email" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -18,7 +19,7 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, age, debitname, job, tel, gender, email, creditrank, debitType, create_time, update_time,
+    id, age, identitys, debitname, location, tel, gender, email, creditrank, debitType, create_time, update_time,
     user_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -39,6 +40,12 @@
     from debit
     where  debitname = #{name}
   </select>
+  <select id="checkidentitys" resultType="int" parameterType="java.lang.Long">
+    SELECT
+    count(1)
+    from debit
+    where identitys = #{identitys}
+  </select>
   <select id="selectBynameAndTel" resultMap="BaseResultMap" parameterType="map">
     SELECT
     <include refid="Base_Column_List" />
@@ -57,12 +64,12 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.ledebit.pojo.debit">
-    insert into debit (age, debitname,
-      job, tel, gender, email, 
+    insert into debit (age, debitname, identitys,
+      location, tel, gender, email, 
       creditrank, debitType, create_time, 
       update_time, user_id)
-    values (#{age,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
-      #{job,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, 
+    values (#{age,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},#{identitys,jdbcType=BIGINT},
+      #{location,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, 
       #{creditrank,jdbcType=INTEGER}, #{debittype,jdbcType=INTEGER}, now(),
       now(), #{userId,jdbcType=INTEGER})
   </insert>
@@ -72,11 +79,14 @@
       <if test="age != null" >
         age,
       </if>
+      <if test="identitys != null">
+        identitys,
+      </if>
       <if test="name != null" >
         debitname,
       </if>
-      <if test="job != null" >
-        job,
+      <if test="location != null" >
+        location,
       </if>
       <if test="tel != null" >
         tel,
@@ -107,11 +117,14 @@
       <if test="age != null" >
         #{age,jdbcType=INTEGER},
       </if>
+      <if test="identitys != null" >
+        #{identitys,jdbcType=BIGINT},
+      </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="job != null" >
-        #{job,jdbcType=VARCHAR},
+      <if test="location != null" >
+        #{location,jdbcType=VARCHAR},
       </if>
       <if test="tel != null" >
         #{tel,jdbcType=VARCHAR},
@@ -145,11 +158,14 @@
       <if test="age != null" >
         age = #{age,jdbcType=INTEGER},
       </if>
+      <if test="identitys != null" >
+        identitys = #{identitys,jdbcType=BIGINT},
+      </if>
       <if test="name != null" >
         debitname = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="job != null" >
-        job = #{job,jdbcType=VARCHAR},
+      <if test="location != null" >
+        location = #{location,jdbcType=VARCHAR},
       </if>
       <if test="tel != null" >
         tel = #{tel,jdbcType=VARCHAR},
@@ -181,8 +197,9 @@
   <update id="updateByPrimaryKey" parameterType="com.ledebit.pojo.debit" >
     update debit
     set age = #{age,jdbcType=INTEGER},
+      identitys = #{identitys,jdbcType=BIGINT},
       debitname = #{name,jdbcType=VARCHAR},
-      job = #{job,jdbcType=VARCHAR},
+      location = #{location,jdbcType=VARCHAR},
       tel = #{tel,jdbcType=VARCHAR},
       gender = #{gender,jdbcType=INTEGER},
       email = #{email,jdbcType=VARCHAR},
@@ -204,5 +221,11 @@
     <include refid="Base_Column_List" />
     FROM debit
     order by id ASC
+  </select>
+  <select id="CheckIdAndUsername" parameterType="map" resultType="java.lang.Integer">
+    SELECT
+    count(1)
+    from debit
+    where id = #{id} and debitname = #{name}
   </select>
 </mapper>

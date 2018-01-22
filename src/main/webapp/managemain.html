@@ -11,11 +11,13 @@
 
 
 <body>
+<div align="center">
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
     <legend>
         乐贷后台贷款信息管理系统导航
     </legend>
 </fieldset>
+</div>
 <ul class="layui-nav">
     <li class="layui-nav-item  layui-this"><a href="managemain.html">主面板</a></li>
     <li class="layui-nav-item">
@@ -30,14 +32,14 @@
     <li class="layui-nav-item">
         <a href="javascript:;">借贷记录管理</a>
         <dl class="layui-nav-child">
-            <dd><a href="recordsearch.html">查询</a></dd>
-            <dd><a href="updatedebit.html">借贷记录校验</a></dd>
-            <dd><a href="">催款</a></dd>
+            <dd><a href="recordsearch.html">查询和校验</a></dd>
+            <dd><a href="recordpush.html">催款</a></dd>
             <!--<dd><a href=""></a></dd>-->
         </dl>
     </li>
     <!--<li class="layui-nav-item"><a href="">社区</a></li>-->
 </ul>
+<script src="/layui.js" charset="utf-8"></script>
 <script src="/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
@@ -52,31 +54,36 @@
     });
 </script>
 
-<script src="/layui.js" charset="utf-8"></script>
+
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
-
+<div>
+    <button class="layui-btn layui-btn-danger" id="loginout">登出</button>
+</div>
 <script>
-    layui.use('table', function(){
-        var table = layui.table;
-
-        table.render({
-            elem: '#test'
-            ,url:'http://localhost:8080/backend/user/managelogin.do'
-            ,cols: [[
-                {field:'id', width:80, title: 'ID', sort: true}
-                ,{field:'username', width:80, title: '用户名'}
-                ,{field:'sex', width:80, title: '性别', sort: true}
-                ,{field:'city', width:80, title: '城市'}
-                ,{field:'sign', title: '签名', minWidth: 150}
-                ,{field:'experience', width:80, title: '积分', sort: true}
-                ,{field:'score', width:80, title: '评分', sort: true}
-                ,{field:'classify', width:80, title: '职业'}
-                ,{field:'wealth', width:135, title: '财富', sort: true}
-            ]]
-            ,page: true
+    layui.use('layer', function() { //独立版的layer无需执行这一句
+        var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+        $ = layui.jquery
+        var form = layui.form
+            , layer = layui.layer
+            , laydate = layui.laydate;
+        // 写在表单后面否则获取不到表单
+        $("#loginout").click(function () {
+            layer.confirm("确认返回登录界面吗", function (index) {
+                $.ajax({
+                    // 用 127.0.0.1 要设置某些头部
+                    url: 'http://localhost:8080/backend/user/loginout.do', // Request url
+                    // 你的 jQuery 版本太低，用 type 属性
+                    type: "POST", // The HTTP method to use for the request
+                    dataType: 'json', // The type of data that you're expecting back from the server
+                    data: null, // Data to be sent to the server
+                    success(res) {
+                        alert(res.msg + "，正前往登录界面");
+                        window.location.href = 'http://localhost:8080/login.html';
+                    },
+                });
+            })
         });
     });
 </script>
-
 </body>
 </html>

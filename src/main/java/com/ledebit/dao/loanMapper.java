@@ -10,6 +10,8 @@ public interface loanMapper {
 
     int insert(loan record);
 
+    int checkno(long recordno);
+
     int insertSelective(loan record);
 
     loan selectByPrimaryKey(Integer id);
@@ -18,11 +20,15 @@ public interface loanMapper {
 
     int updateByPrimaryKey(loan record);
 
-    List<loan> selectall();
+    List<loan> selectallfromloan();
 
-    List<loan>selectByLoanidandDebitname(@Param("debitname") String debitname,@Param("loanid") int loanid);
+    List<loan> selectoverduefromloan(Integer status);
 
-    int updatestatus(@Param("loanid") int loanid,@Param("loanid")int status);
+    List<loan>selectByLoanidandDebitname(@Param("debitname") String debitname,@Param("debitid") Integer debitid);
+
+    int updatestatus(@Param("loanid") int loanid,@Param("status")int status);
+
+    List<loan> selectbydebitid(Integer debitid);
 
 
 }
